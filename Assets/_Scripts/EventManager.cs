@@ -40,4 +40,32 @@ public class EventManager : MonoBehaviour
             OnPlayerDamaged(damage);
         }
     }
+
+    public event Action<int> OnCutsceneTriggered;
+    public void CutsceneTriggered(int index)
+    {
+        if(OnCutsceneTriggered != null)
+        {
+            OnCutsceneTriggered(index);
+        }
+    }
+
+    public event Action<Sprite, string> OnEmotionChanged;
+    public void EmotionChanged(Sprite emotion, string characterName)
+    {
+        if(OnEmotionChanged != null)
+        {
+            OnEmotionChanged(emotion, characterName);
+        }
+    }
+
+    public event Action OnCutsceneExited;
+    public void CutsceneExited()
+    {
+        if (OnEmotionChanged != null)
+        {
+            OnCutsceneExited();
+        }
+    }
+
 }
