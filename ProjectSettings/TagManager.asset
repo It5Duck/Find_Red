@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Harmful
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -11,9 +13,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Ground
+  - Player
+  - Harmful
   - 
   - 
   - 
@@ -40,4 +42,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Fg
+    uniqueID: 1469645809
+    locked: 0
+  - name: PlayerGround
+    uniqueID: 2584699645
+    locked: 0
+  - name: Bg _1
+    uniqueID: 658671475
+    locked: 0
+  - name: Bg_2
+    uniqueID: 1985638257
     locked: 0
