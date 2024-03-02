@@ -4,15 +4,7 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public Door link;
+    public GravityDirection direction;
 }
+public enum GravityDirection { Left, Right, Up, Down }

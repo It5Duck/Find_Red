@@ -8,6 +8,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private PhysicsMaterial2D slipMaterial;
     [SerializeField] private PhysicsMaterial2D frictionMaterial;
+    [SerializeField] private ConstantForce2D cf;
     [Header("Movement")]
     [SerializeField] private float speed;
     [SerializeField] private float acceleration;
@@ -19,6 +20,7 @@ public class Movement : MonoBehaviour
     private bool wasOnGround = false;
     private float placeholder;
     float angle;
+    Vector2 groundDir;
     #endregion
 
     private void Start()
@@ -45,7 +47,9 @@ public class Movement : MonoBehaviour
             {
                 additionalGravity = -1f;
             }
-            rb.velocity += new Vector2(0, additionalGravity);
+            Vector2 g = -Vector2.ClampMagnitude(cf.force, 1f);
+            rb.velocity += g * additionalGravity;
+            angle = Vector2.SignedAngle(new Vector2(-Mathf.RoundToInt(g.x), Mathf.RoundToInt(g.y)), Vector2.up);
         }
 
         Accelerate();
@@ -63,18 +67,31 @@ public class Movement : MonoBehaviour
 
     void Accelerate()
     {
-        rb.velocity = Vector2.Lerp(rb.velocity, new Vector2(transform.right.x * input * speed, rb.velocity.y), acceleration);
+        if (isOnGround)
+        {
+            rb.velocity = Vector2.Lerp(rb.velocity, -groundDir * speed * input, acceleration);
+        }
+        else
+        {
+            if(Mathf.Abs(cf.force.y) > 0f)
+            {
+                rb.velocity = Vector2.Lerp(rb.velocity, new Vector2(transform.right.x * input * speed, rb.velocity.y), acceleration);
+            }
+            else
+            {
+                rb.velocity = Vector2.Lerp(rb.velocity, new Vector2(rb.velocity.x, transform.right.y * input * speed), acceleration);
+            }
+        }
     }
     void Jump()
     {
-        if(isOnGround)
+        if (Mathf.Abs(cf.force.y) > 0f)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(-cf.force.y, -1f, 1f) * jumpForce);
         }
-        else if(hasDoubleJump)
+        else
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            hasDoubleJump = false;
+            rb.velocity = new Vector2(Mathf.Clamp(-cf.force.x, -1f, 1f) * jumpForce, rb.velocity.y);
         }
     }
 
@@ -100,7 +117,16 @@ public class Movement : MonoBehaviour
     {
         if (value.performed)
         {
-            Jump();
+            if (isOnGround)
+            {
+                isOnGround = false;
+                Jump();
+            }
+            else if (hasDoubleJump)
+            {
+                Jump();
+                hasDoubleJump = false;
+            }
             additionalGravity = -0.5f;
             rb.sharedMaterial = slipMaterial;
         }
@@ -114,8 +140,15 @@ public class Movement : MonoBehaviour
     {
         isOnGround = state;
     }
-    void ChangeAngle(float angle)
+    void ChangeAngle(float angle, Vector2 dir)
     {
         this.angle = angle;
+        groundDir = dir;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawRay(transform.position, transform.right);
     }
 }

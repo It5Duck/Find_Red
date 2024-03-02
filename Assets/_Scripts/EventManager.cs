@@ -16,11 +16,11 @@ public class EventManager : MonoBehaviour
             OnGroundedStateChanged(isGrounded);
     }
 
-    public event Action<float> OnAngleChanged;
-    public void AngleChanged(float angle)
+    public event Action<float, Vector2> OnAngleChanged;
+    public void AngleChanged(float angle, Vector2 dir)
     {
         if(OnAngleChanged != null)
-            OnAngleChanged(angle);
+            OnAngleChanged(angle, dir);
     }
 
     public event Action OnPlayerShot;

@@ -40,7 +40,6 @@ public class GroundDetector : MonoBehaviour
     private void SlopeCheck()
     {
         SlopeCheckVertical(transform.position + groundCheckPos);
-
         if (hit)
         {
             slopeNormal = hit.normal;
@@ -56,13 +55,11 @@ public class GroundDetector : MonoBehaviour
         }
         else
         {
+            slopeNormalPerp = Vector2.Perpendicular(slopeNormal);
             slopeAngle = 0f;
             signedAngle = 0f;
         }
-        if(slopeAngle != prevSlopeAngle)
-        {
-            EventManager.instance.AngleChanged(signedAngle);
-        }
+            EventManager.instance.AngleChanged(signedAngle, slopeNormalPerp);
     }
 
     private void SlopeCheckVertical(Vector2 checkPos)
