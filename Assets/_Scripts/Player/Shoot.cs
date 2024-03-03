@@ -53,5 +53,6 @@ public class Shoot : MonoBehaviour
         EventManager.instance.PlayerShot();
         yield return new WaitForSeconds(fireRate);
         canShoot = true;
+        yield return null;
     }
 }

@@ -59,7 +59,7 @@ public class GroundDetector : MonoBehaviour
             slopeAngle = 0f;
             signedAngle = 0f;
         }
-            EventManager.instance.AngleChanged(signedAngle, slopeNormalPerp);
+        GetComponent<IGroundChecker>().ChangeAngle(signedAngle, slopeNormalPerp); //send useful information to the object
     }
 
     private void SlopeCheckVertical(Vector2 checkPos)
@@ -86,7 +86,6 @@ public class GroundDetector : MonoBehaviour
             slopeSideAngle = 0f;
         }
     }
-
     public void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;

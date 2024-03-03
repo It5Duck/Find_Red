@@ -11,18 +11,21 @@ public class Cutscene : ScriptableObject
 
     public void StartPlaymode(CutsceneManager m)
     {
+        index = 0;
         manager = m;
         PlayNextPoint();
     }
 
-    void PlayNextPoint()
+    public void PlayNextPoint()
     {
+        Debug.Log(index);
         if (index >= cutpoints.Count)
         {
             manager.ExitPlaymode();
-            //return;
+            return;
         }
         manager.DisplayCutpoint(cutpoints[index]);
+        EventManager.instance.MovedToNextCutpoint(index);
         index++;
     }
 }

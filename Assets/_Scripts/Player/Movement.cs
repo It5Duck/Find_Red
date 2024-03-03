@@ -1,7 +1,8 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Movement : MonoBehaviour
+public class Movement : MonoBehaviour, IGroundChecker
 {
     #region Variables
     [Header("References")]
@@ -23,10 +24,10 @@ public class Movement : MonoBehaviour
     Vector2 groundDir;
     #endregion
 
-    private void Start()
+    private IEnumerator Start()
     {
+        yield return new WaitForSeconds(0.1f);
         EventManager.instance.OnGroundedStateChanged += GroundedStateChanged;
-        EventManager.instance.OnAngleChanged += ChangeAngle;
     }
     private void FixedUpdate()
     {
@@ -53,14 +54,7 @@ public class Movement : MonoBehaviour
         }
 
         Accelerate();
-
-        placeholder = 0f;
-        float target = transform.eulerAngles.z;
-        target = (target > 180) ? target - 360 : target;
-
-        target = Mathf.SmoothDamp(target, angle, ref placeholder, 0.032f);
-        transform.eulerAngles = new Vector3(0f, 0f, target);
-
+        RotateInGroundDir();
 
         wasOnGround = isOnGround;
     }
@@ -95,6 +89,16 @@ public class Movement : MonoBehaviour
         }
     }
 
+    void RotateInGroundDir()
+    {
+        placeholder = 0f;
+        float target = transform.eulerAngles.z;
+        target = (target > 180) ? target - 360 : target;
+
+        target = Mathf.SmoothDamp(target, angle, ref placeholder, 0.032f);
+        transform.eulerAngles = new Vector3(0f, 0f, target);
+    }
+
     public void AxisRecieved(InputAction.CallbackContext value)
     {
         if(value.started)
@@ -102,7 +106,7 @@ public class Movement : MonoBehaviour
             input = value.ReadValue<float>();
             if(input != 0f)
             {
-                transform.localScale = input > 0 ? new Vector2(2f,2f) : new Vector2(-2f, 2f);
+                transform.localScale = input > 0 ? new Vector2(1f,1f) : new Vector2(-1f, 1f);
             }
             rb.sharedMaterial = slipMaterial;
         }
@@ -140,7 +144,7 @@ public class Movement : MonoBehaviour
     {
         isOnGround = state;
     }
-    void ChangeAngle(float angle, Vector2 dir)
+    public void ChangeAngle(float angle, Vector2 dir)
     {
         this.angle = angle;
         groundDir = dir;

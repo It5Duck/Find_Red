@@ -16,13 +16,6 @@ public class EventManager : MonoBehaviour
             OnGroundedStateChanged(isGrounded);
     }
 
-    public event Action<float, Vector2> OnAngleChanged;
-    public void AngleChanged(float angle, Vector2 dir)
-    {
-        if(OnAngleChanged != null)
-            OnAngleChanged(angle, dir);
-    }
-
     public event Action OnPlayerShot;
     public void PlayerShot()
     {
@@ -65,6 +58,15 @@ public class EventManager : MonoBehaviour
         if (OnEmotionChanged != null)
         {
             OnCutsceneExited();
+        }
+    }
+
+    public event Action<int> OnMovedToNextCutpoint;
+    public void MovedToNextCutpoint(int indexTo)
+    {
+        if(OnMovedToNextCutpoint != null)
+        {
+            OnMovedToNextCutpoint(indexTo);
         }
     }
 

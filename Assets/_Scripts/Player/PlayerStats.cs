@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -9,9 +10,10 @@ public class PlayerStats : MonoBehaviour
     public int health { get; set; }
     private int currentSceneIndex;
     public static PlayerStats instance;
-    private void Start()
+    private IEnumerator Start()
     {
         instance = this;
+        yield return new WaitForSeconds(0.1f);
         EventManager.instance.OnPlayerDamaged += ChangeHealth;
     }
 
