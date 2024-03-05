@@ -16,12 +16,26 @@ public class PatrolingEnemy : Enemy, IGroundChecker
     [SerializeField] private float gravityScale;
     private Vector2 currentTarget;
     private Vector2 groundDir;
+    private Vector2 startPos;
     private float angle;
     private float placeholder;
     private float groundDist;
 
     private void Start()
     {
+        startPos = transform.position;
+        target1 += startPos;
+        target2 += startPos;
+
+        if (transform.localScale.x > 0f)
+        {
+            currentTarget = target2;
+        }
+        else if (transform.localScale.x < 0f)
+        {
+            currentTarget = target1;
+        }
+
         switch (gravityDirection)
         {
             case GravityDirection.Down:
@@ -76,7 +90,7 @@ public class PatrolingEnemy : Enemy, IGroundChecker
         {
             currentTarget = target1;
         }
-        transform.localScale = new Vector2(transform.localScale.x * -1f, 1f);
+        transform.localScale = new Vector2(transform.localScale.x * -1f, 1.2f);
     }
     public void ChangeAngle(float angle, Vector2 dir)
     {
@@ -100,9 +114,9 @@ public class PatrolingEnemy : Enemy, IGroundChecker
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.gray;
-        Gizmos.DrawLine(target1, target2);
-        Gizmos.DrawSphere(target1, 0.25f);
-        Gizmos.DrawSphere(target2, 0.25f);
+        Gizmos.DrawLine((Vector3)target1 + transform.position, (Vector3)target2 + transform.position);
+        Gizmos.DrawSphere((Vector3)target1 + transform.position, 0.25f);
+        Gizmos.DrawSphere((Vector3)target2 + transform.position, 0.25f);
     }
 }
 

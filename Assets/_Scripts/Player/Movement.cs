@@ -10,6 +10,7 @@ public class Movement : MonoBehaviour, IGroundChecker
     [SerializeField] private PhysicsMaterial2D slipMaterial;
     [SerializeField] private PhysicsMaterial2D frictionMaterial;
     [SerializeField] private ConstantForce2D cf;
+    [SerializeField] private Animator animator;
     [Header("Movement")]
     [SerializeField] private float speed;
     [SerializeField] private float acceleration;
@@ -36,6 +37,14 @@ public class Movement : MonoBehaviour, IGroundChecker
             if (!wasOnGround)
             {
                 hasDoubleJump = true;
+                if(input == 0)
+                {
+                    animator.Play("PlayerIdle");
+                }
+                else
+                {
+                    animator.Play("PlayerWalk");
+                }
             }
             if(input == 0)
             {
@@ -44,9 +53,14 @@ public class Movement : MonoBehaviour, IGroundChecker
         }
         else
         {
-            if(wasOnGround && additionalGravity == 0f)
+            if(wasOnGround)
             {
-                additionalGravity = -1f;
+                if(additionalGravity == 0f)
+                {
+                    additionalGravity = -1f;
+                }
+
+                animator.Play("PlayerJump");
             }
             Vector2 g = -Vector2.ClampMagnitude(cf.force, 1f);
             rb.velocity += g * additionalGravity;
@@ -103,6 +117,10 @@ public class Movement : MonoBehaviour, IGroundChecker
     {
         if(value.started)
         {
+            if (isOnGround)
+            {
+                animator.Play("PlayerWalk");
+            }
             input = value.ReadValue<float>();
             if(input != 0f)
             {
@@ -112,8 +130,11 @@ public class Movement : MonoBehaviour, IGroundChecker
         }
         else if (value.canceled)
         {
+            if (isOnGround)
+            {
+                animator.Play("PlayerIdle");
+            }
             input = 0f;
-            
         }
     }
 

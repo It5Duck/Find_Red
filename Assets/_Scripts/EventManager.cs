@@ -70,4 +70,12 @@ public class EventManager : MonoBehaviour
         }
     }
 
+    public event Action OnPlayerDeath;
+    public void PlayerDeath()
+    {
+        if(OnPlayerDeath != null)
+        {
+            OnPlayerDeath();
+        }
+    }
 }

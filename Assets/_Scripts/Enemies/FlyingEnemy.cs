@@ -43,7 +43,6 @@ public class FlyingEnemy : Enemy
     }
     private void Update()
     {
-        Debug.Log(attackStage);
         if (attackStage == AttackStage.Move)
         {
             if (isTargetValid)
