@@ -10,7 +10,14 @@ public class LevelName : MonoBehaviour
     {
         for (int i = 0; i < texts.Length; i++)
         {
-            LeanTween.color(texts[i].gameObject, new Color(texts[i].color.r, texts[i].color.g, texts[i].color.b, 0f), 4f).setEaseInQuint();
+            var color = texts[i].color;
+            var fadeoutcolor = color;
+            fadeoutcolor.a = 0f;
+            LeanTween.value(gameObject, updateValueExampleCallback, color, fadeoutcolor, 1f);
         }
+    }
+    void updateValueExampleCallback(Color val)
+    {
+        texts[0].color = val;
     }
 }

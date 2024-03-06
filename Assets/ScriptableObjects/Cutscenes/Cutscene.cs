@@ -18,7 +18,6 @@ public class Cutscene : ScriptableObject
 
     public void PlayNextPoint()
     {
-        Debug.Log(index);
         if (index >= cutpoints.Count)
         {
             manager.ExitPlaymode();

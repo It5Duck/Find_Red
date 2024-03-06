@@ -34,15 +34,18 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.layer == ignore.value)
+        if(((1 << collision.gameObject.layer) & ignore) != 0)
         {
             return;
         }
-        if(collision is IDamageable)
+        else
         {
-            ((IDamageable)collision).ChangeHealth(damage);
+            if (collision is IDamageable)
+            {
+                ((IDamageable)collision).ChangeHealth(damage);
+            }
+            Destroy(gameObject);
         }
-        //Destroy(gameObject);
     }
 
     public void SetDirection(Vector2 dir)

@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9210ace43943c904092e1ee60443821c, type: 3}
+  m_Name: GodsCall
+  m_EditorClassIdentifier: 
+  cutpoints:
+  - id: 0
+    displayText: 1
+    text: Who dares disturb my peace?
+    speaker: God
+    moveCamera: 0
+    target: {fileID: 0}
+    changeEmotion: 1
+    emotion: {fileID: -7161287590911937533, guid: a0b71fa672849844f88b000cdf12bc16, type: 3}
+  - id: 1
+    displayText: 1
+    text: Oh. It's you. So, uhm...
+    speaker: God
+    moveCamera: 0
+    target: {fileID: 0}
+    changeEmotion: 1
+    emotion: {fileID: -1696557647138859988, guid: a0b71fa672849844f88b000cdf12bc16, type: 3}
+  - id: 2
+    displayText: 1
+    text: You know, Satan stole the color red, which is kind of an important color.
+      So I just have a little request.
+    speaker: God
+    moveCamera: 0
+    target: {fileID: 0}
+    changeEmotion: 0
+    emotion: {fileID: 0}
+  - id: 3
+    displayText: 1
+    text: Could you maybe... You know...
+    speaker: God
+    moveCamera: 0
+    target: {fileID: 0}
+    changeEmotion: 0
+    emotion: {fileID: 0}
+  - id: 4
+    displayText: 1
+    text: Kill Satan and retrieve red?
+    speaker: God
+    moveCamera: 0
+    target: {fileID: 0}
+    changeEmotion: 0
+    emotion: {fileID: 0}
+  - id: 5
+    displayText: 1
+    text: Pwetty Pwease?
+    speaker: God
+    moveCamera: 0
+    target: {fileID: 0}
+    changeEmotion: 1
+    emotion: {fileID: 4483011926995862757, guid: a0b71fa672849844f88b000cdf12bc16, type: 3}
+  - id: 6
+    displayText: 1
+    text: I don't care what your answer is, you must.
+    speaker: God
+    moveCamera: 0
+    target: {fileID: 0}
+    changeEmotion: 1
+    emotion: {fileID: -7161287590911937533, guid: a0b71fa672849844f88b000cdf12bc16, type: 3}
+  - id: 7
+    displayText: 1
+    text: The entrance to hell is to the right, have fun!
+    speaker: God
+    moveCamera: 0
+    target: {fileID: 0}
+    changeEmotion: 1
+    emotion: {fileID: 4483011926995862757, guid: a0b71fa672849844f88b000cdf12bc16, type: 3}
+  - id: 8
+    displayText: 0
+    text: 
+    speaker: 
+    moveCamera: 0
+    target: {fileID: 0}
+    changeEmotion: 0
+    emotion: {fileID: 4483011926995862757, guid: a0b71fa672849844f88b000cdf12bc16, type: 3}

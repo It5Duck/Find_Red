@@ -59,7 +59,7 @@ public class CutsceneManager : MonoBehaviour
         }
         if (point.changeEmotion)
         {
-            EventManager.instance.EmotionChanged(point.emotion, point.speaker);
+            EventManager.instance.EmotionChanged(point.emotion,point.speaker);
         }
     }
 

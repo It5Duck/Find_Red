@@ -163,7 +163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ignore:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 144
   damage: 0.2
   speed: 24
   lifetime: 5
