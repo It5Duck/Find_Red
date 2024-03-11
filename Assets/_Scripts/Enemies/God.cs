@@ -41,7 +41,7 @@ public class God : MonoBehaviour
             Laser l = Instantiate(laserPrefab, transform.position, Quaternion.identity);
             StartCoroutine(l.GodLaser(transform.position, player.position));
             imp.GenerateImpulse();
-            RestFor(1f);
+            StartCoroutine(RestFor(1f));
         }
         else if(stage == AttackStage.Angels2)
         {
@@ -49,33 +49,35 @@ public class God : MonoBehaviour
             StartCoroutine(a1.ShootTimes(5, 0.25f, Vector2.right));
             Angel a2 = Instantiate(angelPrefab, target2.position, Quaternion.identity);
             StartCoroutine(a2.ShootTimes(5, 0.25f, Vector2.left));
-            RestFor(4f);
+            StartCoroutine(RestFor(4f));
         }
         else if( stage == AttackStage.Angels3)
         {
             for (int i = 0; i < 20; i++)
             {
-                float angle = (1 / 360) * (i - 10);
-                Vector2 pos = new Vector2(angle, 0 - angle) * ringRadius;
+                float x = ringRadius * Mathf.Cos(20 * i * Mathf.Deg2Rad);
+                float y = ringRadius * Mathf.Sin(20 * i * Mathf.Deg2Rad);
+                Vector2 pos = new Vector2(x, y) * ringRadius;
                 Angel a = Instantiate(angelPrefab, pos, Quaternion.identity);
-                a.ShootTimesAfter(5, 0.2f, transform, 0.1f * i);
+                StartCoroutine(a.ShootTimesAfter(5, 0.2f, transform, 0.1f * i));
             }
-            RestFor(1f);
+            StartCoroutine(RestFor(10f));
         }
         else if (stage == AttackStage.Skylasers)
         {
             for (int i = 0; i < 7; i++)
             {
-                Laser l = Instantiate(laserPrefab, new Vector3(transform.position.x + i - 3, transform.position.y, 0f), Quaternion.identity);
-                StartCoroutine(l.Activation(new Vector3(transform.position.x + i - 3, 30, 0f), new Vector3(transform.position.x + i - 3, -30, 0f)));
+                Laser l = Instantiate(laserPrefab, new Vector3(transform.position.x + (i - 3)*2.5f, transform.position.y, 0f), Quaternion.identity);
+                StartCoroutine(l.GodLaser2(new Vector3(transform.position.x + (i - 3) * 2.5f, 30, 0f), new Vector3(transform.position.x + (i - 3) * 2.5f, -30, 0f)));
             }
-            RestFor(1f);
+            StartCoroutine(RestFor(2f));
         }
     }
 
     void SelectRandomAttack()
     {
-        stage = (AttackStage)Random.Range(2, 6);
+        //stage = (AttackStage)Random.Range(2, 6);
+        stage = AttackStage.Angels3;
     }
 
     IEnumerator RestFor(float seconds)

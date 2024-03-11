@@ -9,7 +9,7 @@ public class Angel : MonoBehaviour
     {
         for (int i = 0; i < times; i++)
         {
-            Bullet b = Instantiate(bulletPrefab);
+            Bullet b = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
             b.SetDirection((target.position - transform.position).normalized);
             yield return new WaitForSeconds(rate);
         }
@@ -20,7 +20,7 @@ public class Angel : MonoBehaviour
     {
         for (int i = 0; i < times; i++)
         {
-            Bullet b = Instantiate(bulletPrefab);
+            Bullet b = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
             b.SetDirection(dir);
             yield return new WaitForSeconds(rate);
         }
@@ -32,7 +32,7 @@ public class Angel : MonoBehaviour
         yield return new WaitForSeconds(delay);
         for (int i = 0; i < times; i++)
         {
-            Bullet b = Instantiate(bulletPrefab);
+            Bullet b = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
             b.SetDirection(dir);
             yield return new WaitForSeconds(rate);
         }
@@ -44,7 +44,7 @@ public class Angel : MonoBehaviour
         yield return new WaitForSeconds(delay);
         for (int i = 0; i < times; i++)
         {
-            Bullet b = Instantiate(bulletPrefab);
+            Bullet b = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
             b.SetDirection((target.position - transform.position).normalized);
             yield return new WaitForSeconds(rate);
         }

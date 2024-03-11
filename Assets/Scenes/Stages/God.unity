@@ -632,7 +632,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: eb53861db6b23d24984fcab71eb2eb85, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: eb53861db6b23d24984fcab71eb2eb85, type: 3}
       propertyPath: m_LocalPosition.z
@@ -768,7 +768,7 @@ MonoBehaviour:
   player: {fileID: 99080865}
   angelPrefab: {fileID: 8221953491249278765, guid: 4d0dbcb423923da4a88c87a0af13855e, type: 3}
   laserPrefab: {fileID: 8787762844684882968, guid: 5b5c5833036bf8f4891a57d63ca0d007, type: 3}
-  ringRadius: 7
+  ringRadius: 2.5
   imp: {fileID: 1851528318}
   cam: {fileID: 2177941240089910607}
   environment: {fileID: 698857952}
@@ -1059,7 +1059,7 @@ Transform:
   m_GameObject: {fileID: 1229159009060622482}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -20}
+  m_LocalPosition: {x: 0, y: 0, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1078,7 +1078,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 0, z: -20}
+  m_FollowOffset: {x: 0, y: 0, z: -30}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -1159,7 +1159,7 @@ Transform:
   m_GameObject: {fileID: 6503993846471800975}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -20}
+  m_LocalPosition: {x: 0, y: 0, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
