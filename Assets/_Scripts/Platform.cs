@@ -78,15 +78,6 @@ public class Platform : MonoBehaviour
             }
             dir *= -1f;
             state = PlatformState.Move;
-            collision.transform.parent = transform;
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            collision.transform.parent = null;
         }
     }
 

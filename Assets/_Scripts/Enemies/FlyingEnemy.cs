@@ -16,6 +16,7 @@ public class FlyingEnemy : Enemy
     [SerializeField] private LayerMask ground;
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private Bullet bulletPrefab;
+    [SerializeField] private AudioSource source;
     private AttackStage attackStage = AttackStage.Move;
     private Vector2 targetPoint;
     private Vector2 origin;
@@ -97,6 +98,7 @@ public class FlyingEnemy : Enemy
             yield return new WaitForSeconds(1f);
             Bullet bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
             bullet.SetDirection((target.position - transform.position).normalized);
+            source.Play();
             yield return new WaitForSeconds(1f);
             attackStage = AttackStage.Move;
         }

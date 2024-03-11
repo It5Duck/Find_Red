@@ -77,7 +77,14 @@ public class Movement : MonoBehaviour, IGroundChecker
     {
         if (isOnGround)
         {
-            rb.velocity = Vector2.Lerp(rb.velocity, -groundDir * speed * input, acceleration);
+            if (cf.force.y > 0f)
+            {
+                rb.velocity = Vector2.Lerp(rb.velocity, new Vector2(transform.right.x * input * speed, rb.velocity.y), acceleration);
+            }
+            else
+            {
+                rb.velocity = Vector2.Lerp(rb.velocity, -groundDir * speed * input, acceleration);
+            }
         }
         else
         {
@@ -107,8 +114,10 @@ public class Movement : MonoBehaviour, IGroundChecker
     {
         placeholder = 0f;
         float target = transform.eulerAngles.z;
-        target = (target > 180) ? target - 360 : target;
-
+        if (cf.force.y <= 0f)
+        {
+            target = (target > 180) ? target - 360 : target;
+        }
         target = Mathf.SmoothDamp(target, angle, ref placeholder, 0.032f);
         transform.eulerAngles = new Vector3(0f, 0f, target);
     }

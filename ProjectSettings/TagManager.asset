@@ -18,7 +18,7 @@ TagManager:
   - Ground
   - Player
   - Harmful
-  - 
+  - Ground2
   - 
   - 
   - 
@@ -45,15 +45,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Fg
-    uniqueID: 1469645809
+  - name: Bg2
+    uniqueID: 1985638257
+    locked: 0
+  - name: Bg1
+    uniqueID: 658671475
     locked: 0
   - name: PlayerGround
     uniqueID: 2584699645
     locked: 0
-  - name: Bg _1
-    uniqueID: 658671475
-    locked: 0
-  - name: Bg_2
-    uniqueID: 1985638257
+  - name: Fg
+    uniqueID: 1469645809
     locked: 0

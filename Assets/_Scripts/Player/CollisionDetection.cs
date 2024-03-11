@@ -5,12 +5,25 @@ using UnityEngine;
 public class CollisionDetection : MonoBehaviour
 {
     [SerializeField] private Vector2 teleportOffset;
+    [SerializeField] private GroundDetector gd;
+    [SerializeField] private SortingLayer layer;
     [SerializeField] private ConstantForce2D cf;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision is IHarmful)
         {
-            EventManager.instance.PlayerDamaged(((IHarmful)collision).damage);
+            if (collision.gameObject.CompareTag("Respawn"))
+            {
+                EventManager.instance.PlayerDamaged(((IHarmful)collision).damage, true);
+            }
+            else if (collision.gameObject.CompareTag("Harmful"))
+            {
+                EventManager.instance.PlayerDamaged(((IHarmful)collision).damage, false);
+            }
+        }
+        else if (collision.gameObject.CompareTag("Respawn"))
+        {
+            EventManager.instance.PlayerDamaged(-1, true);
         }
         else if (collision.gameObject.CompareTag("Cutscene"))
         {
@@ -22,15 +35,26 @@ public class CollisionDetection : MonoBehaviour
     {
         if (collision is IHarmful)
         {
-            EventManager.instance.PlayerDamaged(((IHarmful)collision).damage);
+            if (collision.gameObject.CompareTag("Respawn"))
+            {
+                EventManager.instance.PlayerDamaged(((IHarmful)collision).damage, true);
+            }
+            else if (collision.gameObject.CompareTag("Harmful"))
+            {
+                EventManager.instance.PlayerDamaged(((IHarmful)collision).damage, false);
+            }
+        }
+        else if (collision.gameObject.CompareTag("Respawn"))
+        {
+            EventManager.instance.PlayerDamaged(-1, true);
         }
         else if (collision.gameObject.CompareTag("Door"))
         {
-            Teleport(collision.gameObject.GetComponentInParent<Door>().link);
+            Teleport(collision.gameObject.GetComponentInParent<Door>().link, collision.gameObject.GetComponentInParent<Door>());
         }
     }
 
-    void Teleport(Door target)
+    void Teleport(Door target, Door sender)
     {
         switch (target.direction)
         {
@@ -48,9 +72,20 @@ public class CollisionDetection : MonoBehaviour
                 break;
             case GravityDirection.Up:
                 cf.force = new Vector2(0f, 9.81f);
-                transform.eulerAngles = new Vector3(0f, 0f, 180f);
+                transform.eulerAngles = new Vector3(0f, 0f, -180f);
                 break;
         }
-        transform.position = target.transform.position - (target.transform.right + (Vector3)teleportOffset * target.transform.localScale.x);
+        if(sender.gameObject.layer != target.gameObject.layer)
+        {
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), sender.gameObject.layer, true);
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), target.gameObject.layer, false);
+            gd.groundMask = 1 << target.gameObject.layer;
+            SpriteRenderer[] srs = GetComponentsInChildren<SpriteRenderer>();
+            for (int i = 0; i < srs.Length; i++)
+            {
+                srs[i].sortingLayerID = target.gameObject.GetComponentInChildren<SpriteRenderer>().sortingLayerID;
+            }
+        }
+        transform.position = target.transform.position + (Vector3)teleportOffset;
     }
 }

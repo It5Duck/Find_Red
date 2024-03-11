@@ -25,12 +25,12 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    public event Action<int> OnPlayerDamaged;
-    public void PlayerDamaged(int damage)
+    public event Action<int, bool> OnPlayerDamaged;
+    public void PlayerDamaged(int damage, bool doRespawn)
     {
         if(OnPlayerDamaged != null)
         {
-            OnPlayerDamaged(damage);
+            OnPlayerDamaged(damage, doRespawn);
         }
     }
 

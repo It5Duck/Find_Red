@@ -9,18 +9,25 @@ public class Shoot : MonoBehaviour
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private Vector3 spawnOffset;
     [SerializeField] private float fireRate;
+    [SerializeField] private AudioClip shot;
     private Vector3 mousePos;
     private bool canShoot = true;
     Plane plane = new Plane(Vector3.forward, 0);
     Bullet b = null;
+    AudioSource source;
 
+    private void Start()
+    {
+        source = GetComponent<AudioSource>();
+    }
     public void GetClick(InputAction.CallbackContext value)
     {
         if (value.started)
         {
             if(canShoot)
             {
-                b = Instantiate(bulletPrefab, transform.position + spawnOffset, Quaternion.identity, transform);
+                b = Instantiate(bulletPrefab, transform.position + transform.up * spawnOffset.y, Quaternion.identity, transform);
+                b.gameObject.layer = gameObject.layer;
                 StartCoroutine(ShootCooldown());
             }
         }
@@ -31,11 +38,13 @@ public class Shoot : MonoBehaviour
                 b.transform.parent = null;
                 b.SetDirection(-(b.transform.position - mousePos).normalized);
                 b = null;
+                source.clip = shot;
+                source.Play();
             }
         }
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         float distance;

@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Stages/Styx.unity
     guid: aa44a9d05e10ff844ae77b86a2de6c21
+  - enabled: 1
+    path: Assets/Scenes/Stages/Labirynth.unity
+    guid: 488971e3da194474b959fb4b5631f203
   m_configObjects: {}

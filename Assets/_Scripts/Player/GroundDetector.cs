@@ -5,7 +5,7 @@ public class GroundDetector : MonoBehaviour
     #region Variables
     [SerializeField] private Vector3 groundCheckPos; //Position relative to the player which detertmines where the ground check begins (ignore z coordinate)
     [SerializeField] private Vector3 groundCheckSize; //Size of the box in which the ground check will occour
-    [SerializeField] private LayerMask groundMask;
+    [SerializeField] public LayerMask groundMask;
     private float slopeAngle;
     private float prevSlopeAngle;
     private float slopeSideAngle;

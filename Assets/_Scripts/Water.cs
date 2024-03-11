@@ -117,13 +117,31 @@ public class Water : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
-        Impact(collision, rb.velocity.y * impactMultiplier);
+        if (collision.GetComponent<Rigidbody2D>() != null)
+        {
+
+            Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
+
+            Impact(collision, rb.velocity.y * impactMultiplier);
+        }
+        else
+        {
+            Impact(collision, 4 * impactMultiplier);
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
-        Impact(collision, rb.velocity.y / 2f * impactMultiplier);
+        if( collision.GetComponent<Rigidbody2D>() != null )
+        {
+
+            Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
+
+            Impact(collision, rb.velocity.y / 2f * impactMultiplier);
+        }
+        else
+        {
+            Impact(collision, impactMultiplier);
+        }
     }
 
     //Calculate the splash

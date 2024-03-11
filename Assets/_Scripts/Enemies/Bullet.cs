@@ -7,6 +7,8 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float damage;//should be negative
     [SerializeField] private float speed;
     [SerializeField] private float lifetime; //in seconds
+    [SerializeField] private AudioSource source;
+    [SerializeField] private AudioClip impact;
     private Vector2 direction = Vector2.zero;
     private Rigidbody2D rb;
 
@@ -44,6 +46,8 @@ public class Bullet : MonoBehaviour
             {
                 ((IDamageable)collision).ChangeHealth(damage);
             }
+            source.clip = impact;
+            source.Play();
             Destroy(gameObject);
         }
     }

@@ -14,6 +14,10 @@ public class Trigger : MonoBehaviour
     enum TriggerType {Cutscene, Falling, NextLVL}
     [SerializeField] TriggerType type = TriggerType.Cutscene;
     public int index;
+    private void Start()
+    {
+        fade.gameObject.SetActive(true);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -29,9 +33,19 @@ public class Trigger : MonoBehaviour
             }
             else if(type == TriggerType.NextLVL)
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                StartCoroutine(NextLevel());
             }
         }
+    }
+
+    IEnumerator NextLevel()
+    {
+        GameObject.Find("Creature").SetActive(false);
+        fade.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0f);
+        fade.SetActive(true);
+        fade.GetComponent<Fade>().FadeIn();
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     IEnumerator Fall()

@@ -12,7 +12,7 @@ public class Fade : MonoBehaviour
         FadeOut();
     }
 
-    void FadeOut()
+    public void FadeOut()
     {
         var color = img.color;
         var fadeoutcolor = color;
@@ -31,5 +31,13 @@ public class Fade : MonoBehaviour
         var fadeoutcolor = color;
         fadeoutcolor.a = 1f;
         LeanTween.value(gameObject, updateValueExampleCallback, color, fadeoutcolor, 2f);
+    }
+
+    public void FadeIn(float time)
+    {
+        var color = img.color;
+        var fadeoutcolor = color;
+        fadeoutcolor.a = 1f;
+        LeanTween.value(gameObject, updateValueExampleCallback, color, fadeoutcolor, time);
     }
 }
