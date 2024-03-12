@@ -4,11 +4,11 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private LayerMask ignore;
-    [SerializeField] private float damage;//should be negative
+    [SerializeField] private float damage;
     [SerializeField] private float speed;
     [SerializeField] private float lifetime; //in seconds
-    [SerializeField] private AudioSource source;
     [SerializeField] private AudioClip impact;
+    [SerializeField] private SoundSetter setter;
     private Vector2 direction = Vector2.zero;
     private Rigidbody2D rb;
 
@@ -42,13 +42,44 @@ public class Bullet : MonoBehaviour
         }
         else
         {
-            if (collision is IDamageable)
+            IDamageable d;
+            if (collision.gameObject.TryGetComponent<IDamageable>(out d))
             {
-                ((IDamageable)collision).ChangeHealth(damage);
+                d.ChangeHealth(-damage);
             }
-            source.clip = impact;
-            source.Play();
-            Destroy(gameObject);
+            Instantiate(setter).SetSound(impact);
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                Destroy(gameObject, 0.05f);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (((1 << collision.gameObject.layer) & ignore) != 0)
+        {
+            return;
+        }
+        else
+        {
+            IDamageable d;
+            if (collision.gameObject.TryGetComponent<IDamageable>(out d))
+            {
+                d.ChangeHealth(-damage);
+            }
+            Instantiate(setter).SetSound(impact);
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                Destroy(gameObject, 0.05f);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 

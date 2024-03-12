@@ -14,11 +14,11 @@ public class CollisionDetection : MonoBehaviour
         {
             if (collision.gameObject.CompareTag("Respawn"))
             {
-                EventManager.instance.PlayerDamaged(((IHarmful)collision).damage, true);
+                EventManager.instance.PlayerDamaged(-((IHarmful)collision).damage, true);
             }
             else if (collision.gameObject.CompareTag("Harmful"))
             {
-                EventManager.instance.PlayerDamaged(((IHarmful)collision).damage, false);
+                EventManager.instance.PlayerDamaged(-((IHarmful)collision).damage, false);
             }
         }
         else if (collision.gameObject.CompareTag("Respawn"))
@@ -29,6 +29,10 @@ public class CollisionDetection : MonoBehaviour
         {
             EventManager.instance.CutsceneTriggered(collision.GetComponent<Trigger>().index);
         }
+        else if (collision.gameObject.CompareTag("Harmful"))
+        {
+            EventManager.instance.PlayerDamaged(-1, false);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -37,11 +41,11 @@ public class CollisionDetection : MonoBehaviour
         {
             if (collision.gameObject.CompareTag("Respawn"))
             {
-                EventManager.instance.PlayerDamaged(((IHarmful)collision).damage, true);
+                EventManager.instance.PlayerDamaged(-((IHarmful)collision).damage, true);
             }
             else if (collision.gameObject.CompareTag("Harmful"))
             {
-                EventManager.instance.PlayerDamaged(((IHarmful)collision).damage, false);
+                EventManager.instance.PlayerDamaged(-((IHarmful)collision).damage, false);
             }
         }
         else if (collision.gameObject.CompareTag("Respawn"))
@@ -51,6 +55,10 @@ public class CollisionDetection : MonoBehaviour
         else if (collision.gameObject.CompareTag("Door"))
         {
             Teleport(collision.gameObject.GetComponentInParent<Door>().link, collision.gameObject.GetComponentInParent<Door>());
+        }
+        else if (collision.gameObject.CompareTag("Harmful"))
+        {
+            EventManager.instance.PlayerDamaged(-1, false);
         }
     }
 

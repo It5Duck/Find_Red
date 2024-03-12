@@ -1,6 +1,9 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Devil : MonoBehaviour, IDamageable
@@ -15,13 +18,22 @@ public class Devil : MonoBehaviour, IDamageable
     [SerializeField] private LayerMask ground;
     [SerializeField] private Slider healthBar;
     [SerializeField] private Vector3 hornOffset;
+    [SerializeField] private AudioClip laser;
+    [SerializeField] private AudioClip shoot;
+    [SerializeField] private AudioClip died;
+    [SerializeField] private AudioClip music;
+    [SerializeField] private GameObject death;
+    [SerializeField] CinemachineImpulseSource imp;
     enum AttackStage { Resting, Thinking, Rotating, Shoot, Horns, Lasers}//0-5
-    AttackStage stage = AttackStage.Thinking;
+    AttackStage stage = AttackStage.Resting;
     private float minRotationDistance;
     private bool canShoot = true;
     private float randomAngle = 999f;
     private float refVel = 0;
-
+    private void Start()
+    {
+        health = 10f;
+    }
     void Update()
     {
         if (stage == AttackStage.Thinking)
@@ -40,7 +52,7 @@ public class Devil : MonoBehaviour, IDamageable
                 // Start a shoot coroutine that Instantiates a projectile and starts a cooldown
                 StartCoroutine(RapidFire());
             }
-            if(Mathf.Abs(transform.eulerAngles.z-randomAngle) < 5f)
+            if(Mathf.Abs(transform.eulerAngles.z-randomAngle) < 10f)
             {
                 StartCoroutine(RestFor(1f));
             }
@@ -85,6 +97,7 @@ public class Devil : MonoBehaviour, IDamageable
                 Vector2 dir = new Vector2(rndX, rndY);
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, 30f, ground);
                 Laser l = Instantiate(laserPrefab);
+                StartCoroutine(PlaySoundAfter(0.4f, laser));
                 if (hit)
                 {
                     StartCoroutine(l.Activation(transform.position, hit.point));
@@ -119,6 +132,12 @@ public class Devil : MonoBehaviour, IDamageable
     {
         health += amount;
         healthBar.value = health;
+        if (health <= 0)
+        {
+
+            StopAllCoroutines();
+            StartCoroutine(Die());
+        }
     }
 
     IEnumerator RestFor(float seconds)
@@ -136,6 +155,7 @@ public class Devil : MonoBehaviour, IDamageable
         yield return new WaitForSeconds(0.5f);
         Bullet b = Instantiate(bulletPrefab);
         b.SetDirection((player.position-transform.position).normalized);
+        StartCoroutine(PlaySoundAfter(0f, shoot));
     }
 
     IEnumerator RapidFire()
@@ -143,6 +163,7 @@ public class Devil : MonoBehaviour, IDamageable
         canShoot = false;
         Bullet b = Instantiate(bulletPrefab);
         b.SetDirection(-transform.up);
+        StartCoroutine(PlaySoundAfter(0f, shoot));
         yield return new WaitForSeconds(0.15f);
         canShoot = true;
     }
@@ -157,5 +178,35 @@ public class Devil : MonoBehaviour, IDamageable
         hornL.transform.eulerAngles = new Vector3 (0, 0, 0);
         hornR.transform.eulerAngles = new Vector3 (0, 0, 0);
         StartCoroutine(RestFor(1f));
+    }
+
+    IEnumerator PlaySoundAfter(float time, AudioClip clip)
+    {
+        yield return new WaitForSeconds(time);
+        GetComponent<AudioSource>().clip = clip;
+        GetComponent<AudioSource>().Play();
+    }
+    IEnumerator Die()
+    {
+        SoundManager.instance.BossEnd();
+        stage = AttackStage.Resting;
+        player.GetComponent<PlayerInput>().enabled = false;
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(PlaySoundAfter(0f, died));
+        Instantiate(death, transform.position, Quaternion.identity);
+        GetComponent<Collider2D>().enabled = false;
+        SpriteRenderer[] children = GetComponentsInChildren<SpriteRenderer>();
+        for (int i = 0; i < children.Length; i++)
+        {
+            children[i].enabled = false;
+        }
+        yield return new WaitForSeconds(3.5f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+    public void StartFight()
+    {
+        SoundManager.instance.PlaySong(music);
+        SoundManager.instance.BossStart();
+        stage = AttackStage.Thinking;
     }
 }

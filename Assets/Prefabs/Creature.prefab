@@ -364,6 +364,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxhealth: 5
   damage: 1
+  checkpoints: []
+  current: {fileID: 0}
+  hpContainer: {fileID: 0}
+  hpPrefab: {fileID: 6453521171476969389, guid: ca6fd7e423098d640981cfad0b30c63b, type: 3}
+  fade: {fileID: 0}
+  canBEHurt: 1
 --- !u!114 &610450995501169129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,7 +427,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: ff703c56490502b4d8044a8702bfe584, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

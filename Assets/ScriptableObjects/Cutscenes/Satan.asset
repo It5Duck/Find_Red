@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9210ace43943c904092e1ee60443821c, type: 3}
+  m_Name: Satan
+  m_EditorClassIdentifier: 
+  cutpoints:
+  - id: 0
+    displayText: 1
+    text: What?!
+    speaker: Satan
+    moveCamera: 0
+    target: {fileID: 0}
+    changeEmotion: 0
+    emotion: {fileID: 0}
+  - id: 1
+    displayText: 1
+    text: How did you find me? You weren't supposed to get through everything.
+    speaker: Satan
+    moveCamera: 0
+    target: {fileID: 0}
+    changeEmotion: 0
+    emotion: {fileID: 0}
+  - id: 2
+    displayText: 1
+    text: Oh God sent you? To kill me?
+    speaker: Satan
+    moveCamera: 0
+    target: {fileID: 0}
+    changeEmotion: 0
+    emotion: {fileID: 0}
+  - id: 3
+    displayText: 1
+    text: I have a good reason to have stolen the color red.
+    speaker: Satan
+    moveCamera: 0
+    target: {fileID: 0}
+    changeEmotion: 0
+    emotion: {fileID: 0}
+  - id: 4
+    displayText: 1
+    text: Ugh! Fine, just get this over with.
+    speaker: Satan
+    moveCamera: 0
+    target: {fileID: 0}
+    changeEmotion: 0
+    emotion: {fileID: 0}
+  - id: 5
+    displayText: 0
+    text: 
+    speaker: 
+    moveCamera: 0
+    target: {fileID: 0}
+    changeEmotion: 0
+    emotion: {fileID: 0}

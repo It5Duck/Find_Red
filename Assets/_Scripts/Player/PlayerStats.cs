@@ -17,6 +17,16 @@ public class PlayerStats : MonoBehaviour
     public int health { get; set; }
     private int currentSceneIndex;
     public static PlayerStats instance;
+    public bool canBEHurt = true;
+
+    private void Awake()
+    {
+        hps = new List<GameObject>();
+        for (int i = 0; i < maxhealth; i++)
+        {
+            hps.Add(Instantiate(hpPrefab, hpContainer.transform));
+        }
+    }
     private IEnumerator Start()
     {
         health = maxhealth;
@@ -32,35 +42,40 @@ public class PlayerStats : MonoBehaviour
     public void ChangeHealth(int amount, bool doRespawn)
     {
         int sum = amount + health;
-        if(sum > maxhealth)
+        if (canBEHurt)
         {
-            health = maxhealth;
-        }
-        else
-        {
-            health += amount;
-        }
-        if(amount < 0)
-        {
-            for (int i = 0; i < Mathf.Abs(amount); i++)
+            if (sum > maxhealth)
             {
-                //StartCoroutine(RemoveHP());
+                health = maxhealth;
             }
-            if(doRespawn)
+            else
             {
-                StartCoroutine(Respawn());
+                health += amount;
             }
-        }
-        else
-        {
-            for (int i = 0; i < amount; i++)
+            if (amount < 0)
             {
-                hps.Add(Instantiate(hpPrefab, hpContainer.transform));
+                for (int i = 0; i < Mathf.Abs(amount); i++)
+                {
+                    StartCoroutine(RemoveHP());
+                }
+                if (doRespawn)
+                {
+                    StartCoroutine(Respawn());
+                }
+                GetComponent<AudioSource>().Play();
             }
-        }
-        if(health <= 0)
-        {
-            PlayerDied();
+            else
+            {
+                for (int i = 0; i < amount; i++)
+                {
+                    hps.Add(Instantiate(hpPrefab, hpContainer.transform));
+                }
+            }
+            if (health <= 0)
+            {
+                PlayerDied();
+            }
+            InvincibleFor(0.2f);
         }
     }
 
@@ -81,7 +96,9 @@ public class PlayerStats : MonoBehaviour
     {
         LeanTween.moveLocalY(hps[hps.Count - 1], -50f, 1f);
         yield return new WaitForSeconds(1f);
-        hps.Remove(hps[hps.Count - 1]);
+        GameObject last = hps[hps.Count - 1];
+        hps.Remove(last);
+        Destroy(last);
     }
 
     IEnumerator Respawn()
@@ -91,5 +108,12 @@ public class PlayerStats : MonoBehaviour
         yield return new WaitForSecondsRealtime(1f);
         gameObject.SetActive(true);
         transform.position = current.transform.position;
+    }
+
+    IEnumerator InvincibleFor(float time)
+    {
+        canBEHurt = false;
+        yield return new WaitForSeconds(time);
+        canBEHurt = true;
     }
 }

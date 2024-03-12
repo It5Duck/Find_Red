@@ -74,10 +74,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_SortingLayerID: 1469645809
+  m_SortingLayer: 4
+  m_SortingOrder: 20
+  m_Sprite: {fileID: 21300000, guid: abf3d41948054a347892abc9cc5eb607, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -122,7 +122,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.4
 --- !u!50 &602228358247968546
 Rigidbody2D:
   serializedVersion: 4
@@ -168,8 +168,8 @@ MonoBehaviour:
   damage: 1
   speed: 18
   lifetime: 5
-  source: {fileID: 5554279928060087159}
   impact: {fileID: 8300000, guid: 47328c5acaa918e4a936d60566222f2e, type: 3}
+  setter: {fileID: 8308055897352132125, guid: 5afac985cd7d12a48bc20a7c157d2099, type: 3}
 --- !u!82 &5554279928060087159
 AudioSource:
   m_ObjectHideFlags: 0

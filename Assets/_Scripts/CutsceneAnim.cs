@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class CutsceneAnim : MonoBehaviour
 {
-    private enum CutsceneName { House, GodsCall}
+    private enum CutsceneName { House, GodsCall, Satan, FinalGod}
     [SerializeField] private string myName;
     [SerializeField] private int cutpointIndex;
     [SerializeField] private CutsceneName cutsceneName;
@@ -34,6 +34,30 @@ public class CutsceneAnim : MonoBehaviour
                 EventManager.instance.OnMovedToNextCutpoint += GodIt;
             }
         }
+        else if(cutsceneName== CutsceneName.Satan)
+        {
+            if (myName == "Satan")
+            {
+                EventManager.instance.OnMovedToNextCutpoint += Satan;
+            }
+            else if (myName == "it")
+            {
+                input.enabled = false;
+                EventManager.instance.OnMovedToNextCutpoint += SatanIt;
+            }
+        }
+        else if(cutsceneName == CutsceneName.FinalGod)
+        {
+            if(myName == "it")
+            {
+                input.enabled = false;
+                EventManager.instance.OnMovedToNextCutpoint += FinalGodIt;
+            }
+            else if(myName == "God")
+            {
+                EventManager.instance.OnMovedToNextCutpoint += FinalGod;
+            }
+        }
     }
 
     void HouseIt(int index)
@@ -53,6 +77,36 @@ public class CutsceneAnim : MonoBehaviour
         if (index == 8)
         {
             cam.m_Follow = input.transform;
+            input.enabled = true;
+        }
+    }
+
+    void Satan(int index)
+    {
+        if(index == 5)
+        {
+            GetComponent<Devil>().StartFight();
+        }
+    }
+    void SatanIt(int index)
+    {
+        if (index == 5)
+        {
+            input.enabled = true;
+        }
+    }
+
+    void FinalGod(int index)
+    {
+        if( index == 5)
+        {
+            GetComponent<God>().StartFight();
+        }
+    }
+    void FinalGodIt(int index)
+    {
+        if (index == 5)
+        {
             input.enabled = true;
         }
     }
