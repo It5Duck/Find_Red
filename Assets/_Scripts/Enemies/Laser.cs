@@ -25,10 +25,10 @@ public class Laser : MonoBehaviour
 
     public IEnumerator GodLaser(Vector2 startPos, Vector2 endPos)
     {
-        eCol.SetPoints(new List<Vector2> { startPos, endPos });
+        eCol.SetPoints(new List<Vector2> { startPos - new Vector2(0, startPos.y), endPos - new Vector2(0, startPos.y) });
         lr.SetPosition(0, startPos);
         lr.SetPosition(1, endPos);
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.1f);
         eCol.enabled = true;
         lr.widthMultiplier = 0.5f;
         lr.material = mat;

@@ -5,9 +5,11 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.U2D;
 
-public class God : MonoBehaviour
+public class God : MonoBehaviour, IDamageable
 {
+    public float health { get; set; }
     [SerializeField] Transform player;
+    [SerializeField] Transform mapCenter;
     [SerializeField] Angel angelPrefab;
     [SerializeField] Laser laserPrefab;
     [SerializeField] float ringRadius;
@@ -31,25 +33,25 @@ public class God : MonoBehaviour
         {
             for (int i = 0; i < 7; i++)
             {
-                Angel a = Instantiate(angelPrefab, new Vector3(transform.position.x + i -3, transform.position.y, 0f), Quaternion.identity);
-                StartCoroutine(a.ShootTimes(5, 0.1f, player));
+                Angel a = Instantiate(angelPrefab, new Vector3(transform.position.x + (i -3) * 2.5f, transform.position.y, 0f), Quaternion.identity);
+                StartCoroutine(a.ShootTimes(5, 0.5f, player));
             }
-            StartCoroutine(RestFor(1.5f));
+            StartCoroutine(RestFor(4f));
         }
         else if (stage == AttackStage.Colorlaser)
         {
             Laser l = Instantiate(laserPrefab, transform.position, Quaternion.identity);
             StartCoroutine(l.GodLaser(transform.position, player.position));
             imp.GenerateImpulse();
-            StartCoroutine(RestFor(1f));
+            StartCoroutine(RestFor(3f));
         }
         else if(stage == AttackStage.Angels2)
         {
             Angel a1 = Instantiate(angelPrefab, target1.position, Quaternion.identity);
-            StartCoroutine(a1.ShootTimes(5, 0.25f, Vector2.right));
+            StartCoroutine(a1.ShootTimesAfter(5, 1f, Vector2.right, 1.5f));
             Angel a2 = Instantiate(angelPrefab, target2.position, Quaternion.identity);
-            StartCoroutine(a2.ShootTimes(5, 0.25f, Vector2.left));
-            StartCoroutine(RestFor(4f));
+            StartCoroutine(a2.ShootTimesAfter(5, 1f, Vector2.left, 1.5f));
+            StartCoroutine(RestFor(8f));
         }
         else if( stage == AttackStage.Angels3)
         {
@@ -59,7 +61,7 @@ public class God : MonoBehaviour
                 float y = ringRadius * Mathf.Sin(20 * i * Mathf.Deg2Rad);
                 Vector2 pos = new Vector2(x, y) * ringRadius;
                 Angel a = Instantiate(angelPrefab, pos, Quaternion.identity);
-                StartCoroutine(a.ShootTimesAfter(5, 0.2f, transform, 0.1f * i));
+                StartCoroutine(a.ShootTimesAfter(3, 2f, mapCenter, 0.1f * i));
             }
             StartCoroutine(RestFor(10f));
         }
@@ -70,14 +72,14 @@ public class God : MonoBehaviour
                 Laser l = Instantiate(laserPrefab, new Vector3(transform.position.x + (i - 3)*2.5f, transform.position.y, 0f), Quaternion.identity);
                 StartCoroutine(l.GodLaser2(new Vector3(transform.position.x + (i - 3) * 2.5f, 30, 0f), new Vector3(transform.position.x + (i - 3) * 2.5f, -30, 0f)));
             }
-            StartCoroutine(RestFor(2f));
+            StartCoroutine(RestFor(3f));
         }
     }
 
     void SelectRandomAttack()
     {
-        //stage = (AttackStage)Random.Range(2, 6);
-        stage = AttackStage.Angels3;
+        //stage = (AttackStage)Random.Range(2, 7);
+        stage = AttackStage.Colorlaser;
     }
 
     IEnumerator RestFor(float seconds)
@@ -85,5 +87,10 @@ public class God : MonoBehaviour
         stage = AttackStage.Resting;
         yield return new WaitForSeconds(seconds);
         stage = AttackStage.Thinking;
+    }
+
+    public void ChangeHealth(float amount)
+    {
+
     }
 }
