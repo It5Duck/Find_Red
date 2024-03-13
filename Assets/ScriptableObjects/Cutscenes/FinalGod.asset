@@ -41,7 +41,7 @@ MonoBehaviour:
     emotion: {fileID: 0}
   - id: 3
     displayText: 1
-    text: You were my pawn, and now...
+    text: You were my pawn, and now . . .
     speaker: God
     moveCamera: 0
     target: {fileID: 0}

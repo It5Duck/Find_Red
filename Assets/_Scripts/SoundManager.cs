@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
@@ -29,6 +28,17 @@ public class SoundManager : MonoBehaviour
         {
             m_AudioSource.volume = val;
         });
+        StartCoroutine(StopPlaying());
     }
 
+    public void SetVolume(float volume)
+    {
+        m_AudioSource.volume = volume;
+    }
+
+    IEnumerator StopPlaying()
+    {
+        yield return new WaitForSeconds(2f);
+        m_AudioSource.Stop();
+    }
 }

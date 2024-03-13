@@ -1,6 +1,5 @@
 using Cinemachine;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -205,8 +204,9 @@ public class Devil : MonoBehaviour, IDamageable
     }
     public void StartFight()
     {
+        SoundManager.instance.SetVolume(0.58F);
         SoundManager.instance.PlaySong(music);
         SoundManager.instance.BossStart();
-        stage = AttackStage.Thinking;
+        StartCoroutine(RestFor(1f));
     }
 }

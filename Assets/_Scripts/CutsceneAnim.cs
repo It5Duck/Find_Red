@@ -1,6 +1,5 @@
 using Cinemachine;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -74,7 +73,7 @@ public class CutsceneAnim : MonoBehaviour
 
     void GodIt(int index)
     {
-        if (index == 8)
+        if (index == 10)
         {
             cam.m_Follow = input.transform;
             input.enabled = true;
@@ -100,7 +99,10 @@ public class CutsceneAnim : MonoBehaviour
     {
         if( index == 5)
         {
-            GetComponent<God>().StartFight();
+            if(gameObject.activeSelf)
+            {
+                GetComponent<God>().StartFight();
+            }
         }
     }
     void FinalGodIt(int index)
@@ -108,6 +110,10 @@ public class CutsceneAnim : MonoBehaviour
         if (index == 5)
         {
             input.enabled = true;
+        }
+        else if(index == 6)
+        {
+            SceneManager.LoadScene(0);
         }
     }
 }

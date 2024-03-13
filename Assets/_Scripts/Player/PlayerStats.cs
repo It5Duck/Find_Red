@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour
@@ -12,6 +13,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private GameObject hpContainer;
     [SerializeField] private GameObject hpPrefab;
     [SerializeField] private GameObject fade;
+    [SerializeField] private AudioClip hurt;
 
     private List<GameObject> hps;//health points
     public int health { get; set; }
@@ -62,6 +64,7 @@ public class PlayerStats : MonoBehaviour
                 {
                     StartCoroutine(Respawn());
                 }
+                GetComponent<AudioSource>().clip = hurt;
                 GetComponent<AudioSource>().Play();
             }
             else
@@ -106,8 +109,9 @@ public class PlayerStats : MonoBehaviour
         fade.GetComponent<Fade>().FadeIn(1f);
         EventManager.instance.DoRespawn(gameObject, fade.GetComponent<Fade>());
         transform.position = current.transform.position;
+        GetComponent<PlayerInput>().enabled = false;
+        yield return new WaitForSecondsRealtime(1f);
         gameObject.SetActive(false);
-        yield return new WaitForSecondsRealtime(0);
     }
 
     IEnumerator InvincibleFor(float time)

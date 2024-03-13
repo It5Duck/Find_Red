@@ -369,6 +369,7 @@ MonoBehaviour:
   hpContainer: {fileID: 0}
   hpPrefab: {fileID: 6453521171476969389, guid: ca6fd7e423098d640981cfad0b30c63b, type: 3}
   fade: {fileID: 0}
+  hurt: {fileID: 8300000, guid: ff703c56490502b4d8044a8702bfe584, type: 3}
   canBEHurt: 1
 --- !u!114 &610450995501169129
 MonoBehaviour:

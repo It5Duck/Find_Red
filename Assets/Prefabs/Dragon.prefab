@@ -278,6 +278,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dragon
       objectReference: {fileID: 0}
+    - target: {fileID: -8653719598885068355, guid: 8bab67b2545f1504fb84c9738a68e1e1, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8653719598885068355, guid: 8bab67b2545f1504fb84c9738a68e1e1, type: 3}
+      propertyPath: m_TagString
+      value: Harmful
+      objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 8bab67b2545f1504fb84c9738a68e1e1, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.2
@@ -356,7 +364,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -5403035536926422147, guid: 8bab67b2545f1504fb84c9738a68e1e1, type: 3}
       propertyPath: m_SortingLayer
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -5403035536926422147, guid: 8bab67b2545f1504fb84c9738a68e1e1, type: 3}
       propertyPath: m_SortingLayerID
@@ -384,7 +392,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3377582628004168651, guid: 8bab67b2545f1504fb84c9738a68e1e1, type: 3}
       propertyPath: m_SortingLayer
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -3377582628004168651, guid: 8bab67b2545f1504fb84c9738a68e1e1, type: 3}
       propertyPath: m_SortingLayerID
@@ -412,7 +420,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2166663849238857194, guid: 8bab67b2545f1504fb84c9738a68e1e1, type: 3}
       propertyPath: m_SortingLayer
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2166663849238857194, guid: 8bab67b2545f1504fb84c9738a68e1e1, type: 3}
       propertyPath: m_SortingLayerID
@@ -428,7 +436,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5359103177601667974, guid: 8bab67b2545f1504fb84c9738a68e1e1, type: 3}
       propertyPath: m_SortingLayer
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5359103177601667974, guid: 8bab67b2545f1504fb84c9738a68e1e1, type: 3}
       propertyPath: m_SortingLayerID
@@ -440,7 +448,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5999041207167196759, guid: 8bab67b2545f1504fb84c9738a68e1e1, type: 3}
       propertyPath: m_SortingLayer
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5999041207167196759, guid: 8bab67b2545f1504fb84c9738a68e1e1, type: 3}
       propertyPath: m_SortingLayerID
@@ -460,7 +468,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6538122573582093264, guid: 8bab67b2545f1504fb84c9738a68e1e1, type: 3}
       propertyPath: m_SortingLayer
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6538122573582093264, guid: 8bab67b2545f1504fb84c9738a68e1e1, type: 3}
       propertyPath: m_SortingLayerID
@@ -594,6 +602,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 405b0707cee861c43b694fda5a7d7aea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  diePrefab: {fileID: 6470740042250225135, guid: a9288a2952a416d46aa08ec31dffc54d, type: 3}
+  setHealth: 1
   speed: 4
   acceleration: 0.2
   rb: {fileID: 5808199290125325565}

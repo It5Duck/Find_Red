@@ -72,11 +72,11 @@ public class Bullet : MonoBehaviour
                 d.ChangeHealth(-damage);
             }
             Instantiate(setter).SetSound(impact);
-            if (collision.gameObject.CompareTag("Player"))
-            {
-                Destroy(gameObject, 0.05f);
-            }
-            else
+            //if (collision.gameObject.CompareTag("Player"))
+            //{
+            //    Destroy(gameObject, 0.05f);
+            //}
+            //else
             {
                 Destroy(gameObject);
             }

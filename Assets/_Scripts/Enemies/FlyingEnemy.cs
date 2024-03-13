@@ -24,6 +24,7 @@ public class FlyingEnemy : Enemy
 
     private void Start()
     {
+        health = setHealth;
         origin = transform.position;
 
         switch (downDirection)

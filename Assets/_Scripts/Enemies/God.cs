@@ -1,7 +1,8 @@
 using Cinemachine;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using UnityEngine.U2D;
 
 public class God : MonoBehaviour, IDamageable
@@ -16,13 +17,21 @@ public class God : MonoBehaviour, IDamageable
     [SerializeField] Camera cam;
     [SerializeField] SpriteShapeRenderer environment;
     [SerializeField] Transform eyeLid;
+    [SerializeField] AudioClip music;
+    [SerializeField] private GameObject death;
+    [SerializeField] private AudioClip die;
+    [SerializeField] private SoundSetter soundPrefab;
 
     [SerializeField] Transform target1;
     [SerializeField] Transform target2;
+    [SerializeField] Slider healthBar;
 
     enum AttackStage { Resting, Thinking, Angels, Colorlaser, Angels2, Angels3, Skylasers }
     AttackStage stage = AttackStage.Resting;
-
+    private void Start()
+    {
+        health = 24f;
+    }
     private void Update()
     {
         if (stage == AttackStage.Thinking)
@@ -126,10 +135,41 @@ public class God : MonoBehaviour, IDamageable
     public void ChangeHealth(float amount)
     {
         health += amount;
+        healthBar.value = health;
+        if (health <= 8)
+        {
+
+            StopAllCoroutines();
+            StartCoroutine(Die());
+        }
     }
 
     public void StartFight()
     {
-        stage = AttackStage.Thinking;
+        SoundManager.instance.PlaySong(music);
+        SoundManager.instance.BossStart();
+        SoundManager.instance.SetVolume(0.58F);
+        StartCoroutine(RestFor(1f));
+    }
+
+    IEnumerator Die()
+    {
+        SoundManager.instance.BossEnd();
+        stage = AttackStage.Resting;
+        player.GetComponent<PlayerInput>().enabled = false;
+        yield return new WaitForSeconds(0.5f);
+        GetComponent<Collider2D>().enabled = false;
+        Instantiate(death, transform.position, Quaternion.identity);
+        SpriteRenderer[] children = GetComponentsInChildren<SpriteRenderer>();
+        for (int i = 0; i < children.Length; i++)
+        {
+            children[i].enabled = false;
+        }
+        SoundSetter s = Instantiate(soundPrefab);
+        s.SetVolume(0.55f);
+        s.SetSound(die);
+        yield return new WaitForSeconds(3.5f);
+        EventManager.instance.CutsceneTriggered(1);
+        gameObject.SetActive(false);
     }
 }

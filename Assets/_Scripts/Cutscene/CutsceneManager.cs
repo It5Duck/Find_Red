@@ -30,6 +30,7 @@ public class CutsceneManager : MonoBehaviour
 
     public void PlayNextCutscene(int index)
     {
+        currentCutsceneIndex = index;
         cutscenes[index].StartPlaymode(this);
     }
 

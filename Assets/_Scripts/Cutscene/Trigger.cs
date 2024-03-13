@@ -1,6 +1,5 @@
 using Cinemachine;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -50,6 +49,7 @@ public class Trigger : MonoBehaviour
 
     IEnumerator Fall()
     {
+        SoundManager.instance.SetVolume(0.58F);
         SoundManager.instance.PlaySong(clip);
         GameObject.Find("Creature").SetActive(false);
         yield return new WaitForSeconds(6.2f);

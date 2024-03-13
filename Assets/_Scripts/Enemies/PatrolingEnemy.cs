@@ -23,6 +23,7 @@ public class PatrolingEnemy : Enemy, IGroundChecker
 
     private void Start()
     {
+        health = setHealth;
         startPos = transform.position;
         target1 += startPos;
         target2 += startPos;

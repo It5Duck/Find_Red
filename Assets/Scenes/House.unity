@@ -663,6 +663,9 @@ MonoBehaviour:
   myName: it
   cutpointIndex: 0
   cutsceneName: 0
+  input: {fileID: 0}
+  god: {fileID: 0}
+  cam: {fileID: 0}
 --- !u!1 &1954203148
 GameObject:
   m_ObjectHideFlags: 0
@@ -1265,7 +1268,9 @@ PrefabInstance:
       value: Canvas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4510960243748068932, guid: 1cf89793e56e1ab4e832d681813b6c44, type: 3}
+    - {fileID: 2089189825028451808, guid: 1cf89793e56e1ab4e832d681813b6c44, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1cf89793e56e1ab4e832d681813b6c44, type: 3}

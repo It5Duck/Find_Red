@@ -23,7 +23,7 @@ MonoBehaviour:
     emotion: {fileID: -7161287590911937533, guid: a0b71fa672849844f88b000cdf12bc16, type: 3}
   - id: 1
     displayText: 1
-    text: Oh. It's you. So, uhm...
+    text: Oh. It's you. So, uhm . . .
     speaker: God
     moveCamera: 0
     target: {fileID: 0}
@@ -40,7 +40,7 @@ MonoBehaviour:
     emotion: {fileID: 0}
   - id: 3
     displayText: 1
-    text: Could you maybe... You know...
+    text: Could you maybe . . . You know . . .
     speaker: God
     moveCamera: 0
     target: {fileID: 0}
@@ -70,6 +70,22 @@ MonoBehaviour:
     target: {fileID: 0}
     changeEmotion: 1
     emotion: {fileID: -7161287590911937533, guid: a0b71fa672849844f88b000cdf12bc16, type: 3}
+  - id: 8
+    displayText: 1
+    text: I gave you some ping pong balls to defend yourself.
+    speaker: God
+    moveCamera: 0
+    target: {fileID: 0}
+    changeEmotion: 1
+    emotion: {fileID: -1696557647138859988, guid: a0b71fa672849844f88b000cdf12bc16, type: 3}
+  - id: 8
+    displayText: 1
+    text: No I am not kidding. Hellish creatures are allergic to plastic.
+    speaker: God
+    moveCamera: 0
+    target: {fileID: 0}
+    changeEmotion: 1
+    emotion: {fileID: -1696557647138859988, guid: a0b71fa672849844f88b000cdf12bc16, type: 3}
   - id: 7
     displayText: 1
     text: The entrance to hell is to the right, have fun!

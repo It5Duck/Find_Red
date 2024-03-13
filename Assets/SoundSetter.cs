@@ -10,4 +10,9 @@ public class SoundSetter : MonoBehaviour
         GetComponent<AudioSource>().Play();
         Destroy(gameObject, clip.length);
     }
+
+    public void SetVolume(float volume)
+    {
+        GetComponent<AudioSource>().volume = volume;
+    }
 }

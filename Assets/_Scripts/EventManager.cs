@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class EventManager : MonoBehaviour
 {
@@ -84,10 +85,12 @@ public class EventManager : MonoBehaviour
     {
         StartCoroutine(Respawn(gameObject, fade));
     }
-    IEnumerator Respawn(GameObject gameObject, Fade fade)
+    IEnumerator Respawn(GameObject player, Fade fade)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.1f);
         fade.GetComponent<Fade>().FadeOut();
-        gameObject.SetActive(true);
+        player.SetActive(true);
+        player.GetComponent<PlayerInput>().enabled = true;
+
     }
 }
