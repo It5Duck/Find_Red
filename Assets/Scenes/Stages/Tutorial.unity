@@ -1136,7 +1136,7 @@ GameObject:
   - component: {fileID: 688249733}
   m_Layer: 8
   m_Name: Spikes_1
-  m_TagString: Harmful
+  m_TagString: Respawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1318,6 +1318,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &756513068 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8079884407149522216, guid: b4aa899ed0f26e047aa465c85ae331a6, type: 3}
+  m_PrefabInstance: {fileID: 621688246}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b55a698eb5cb88d468beef7cb1a8ed5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &780727597
 GameObject:
   m_ObjectHideFlags: 0
@@ -1657,7 +1668,7 @@ GameObject:
   - component: {fileID: 1362790065}
   m_Layer: 8
   m_Name: Spikes_2
-  m_TagString: Harmful
+  m_TagString: Respawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2708,6 +2719,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 4843985084834002234, guid: 11dfc17468e27da4f9960c32b1794bf7, type: 3}
+--- !u!1 &1955683889 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2089189825028451808, guid: 1cf89793e56e1ab4e832d681813b6c44, type: 3}
+  m_PrefabInstance: {fileID: 467085390}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &807369615443895600
 GameObject:
   m_ObjectHideFlags: 3
@@ -2815,6 +2831,22 @@ PrefabInstance:
       propertyPath: fade
       value: 
       objectReference: {fileID: 416944415}
+    - target: {fileID: 5283159972575078551, guid: a865c62b7b922a4499c3b091d4c4cfe7, type: 3}
+      propertyPath: current
+      value: 
+      objectReference: {fileID: 756513068}
+    - target: {fileID: 5283159972575078551, guid: a865c62b7b922a4499c3b091d4c4cfe7, type: 3}
+      propertyPath: hpContainer
+      value: 
+      objectReference: {fileID: 1955683889}
+    - target: {fileID: 5283159972575078551, guid: a865c62b7b922a4499c3b091d4c4cfe7, type: 3}
+      propertyPath: checkpoints.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5283159972575078551, guid: a865c62b7b922a4499c3b091d4c4cfe7, type: 3}
+      propertyPath: checkpoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 756513068}
     - target: {fileID: 7229427688500134553, guid: a865c62b7b922a4499c3b091d4c4cfe7, type: 3}
       propertyPath: groundMask.m_Bits
       value: 64

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5114273777446765566}
   m_Layer: 8
   m_Name: Spikes
-  m_TagString: Harmful
+  m_TagString: Respawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,7 +75,7 @@ SpriteShapeRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1710267651
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Color: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 1}
   m_MaskInteraction: 0

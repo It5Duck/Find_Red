@@ -104,10 +104,10 @@ public class PlayerStats : MonoBehaviour
     IEnumerator Respawn()
     {
         fade.GetComponent<Fade>().FadeIn(1f);
-        gameObject.SetActive(false);
-        yield return new WaitForSecondsRealtime(1f);
-        gameObject.SetActive(true);
+        EventManager.instance.DoRespawn(gameObject, fade.GetComponent<Fade>());
         transform.position = current.transform.position;
+        gameObject.SetActive(false);
+        yield return new WaitForSecondsRealtime(0);
     }
 
     IEnumerator InvincibleFor(float time)

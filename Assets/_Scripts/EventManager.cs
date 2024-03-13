@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class EventManager : MonoBehaviour
@@ -77,5 +78,16 @@ public class EventManager : MonoBehaviour
         {
             OnPlayerDeath();
         }
+    }
+
+    public void DoRespawn(GameObject gameObject, Fade fade)
+    {
+        StartCoroutine(Respawn(gameObject, fade));
+    }
+    IEnumerator Respawn(GameObject gameObject, Fade fade)
+    {
+        yield return new WaitForSeconds(1f);
+        fade.GetComponent<Fade>().FadeOut();
+        gameObject.SetActive(true);
     }
 }

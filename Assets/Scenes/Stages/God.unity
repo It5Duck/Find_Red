@@ -128,6 +128,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3727095746641314063, guid: a865c62b7b922a4499c3b091d4c4cfe7, type: 3}
   m_PrefabInstance: {fileID: 1594506932}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &220320047 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6018556544570168627, guid: 1cf89793e56e1ab4e832d681813b6c44, type: 3}
+  m_PrefabInstance: {fileID: 1735495177}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &386986185
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -497,6 +508,7 @@ GameObject:
   - component: {fileID: 433358858}
   - component: {fileID: 433358860}
   - component: {fileID: 433358861}
+  - component: {fileID: 433358862}
   m_Layer: 0
   m_Name: EventManager
   m_TagString: Untagged
@@ -608,6 +620,20 @@ MonoBehaviour:
   m_DefaultActionMap: Dialog
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &433358862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 433358857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99921cacf7847d447956e8c6c276a640, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texts:
+  - {fileID: 220320047}
 --- !u!1 &672329171
 GameObject:
   m_ObjectHideFlags: 0
